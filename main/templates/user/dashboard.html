@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container my-4">
+	<!-- Featured Products -->
+	<h3 class="my-4 border-bottom pb-1">My Dashboard</h3>
+	<div class="row">
+		<div class="col-md-3">
+			{% include 'user/user-sidebar.html' %}
+		</div>
+		<div class="col-md-9">
+			<!-- Cake Facts -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Did You Know?</h5>
+					<p class="card-text" id="cakeFact"></p>
+					<button class="btn btn-primary" id="showFactBtn">Show Another Fact</button>
+				</div>
+			</div>
+			<!-- End Cake Facts -->
+		</div>
+	</div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+	// Array of cake facts
+	var cakeFacts = [
+		"Cakes have been around for thousands of years, with the ancient Egyptians being among the first to bake them.",
+		"The world's largest cake weighed over 128,000 pounds.",
+		"Chocolate is the most popular dessert flavor worldwide.",
+		"Did you know that the word 'dessert' comes from the French word 'desservir,' which means 'to clear the table'? It refers to the sweet course served after the main meal.",
+		"Red velvet cake gets its distinctive color from the reaction between cocoa powder and acidic ingredients like buttermilk and vinegar.",
+		"The tradition of putting candles on birthday cakes dates back to ancient Greece, where people believed that the smoke carried their wishes and prayers to the gods.",
+		"The most expensive cake ever made was worth $75 million and was adorned with diamonds."
+	];
+
+	// Display a random cake fact initially
+	showRandomFact();
+
+	// Event listener for the "Show Another Fact" button
+	$('#showFactBtn').click(showRandomFact);
+
+	// Function to display a random cake fact with fading effect
+	function showRandomFact() {
+		var randomFact = cakeFacts[Math.floor(Math.random() * cakeFacts.length)];
+		$('#cakeFact').fadeOut(300, function() {
+			$(this).text(randomFact).fadeIn(300);
+		});
+	}
+});
+</script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ecommerce Bootstrap Template</title>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free/css/all.min.css' %}" />
+	<!-- Bootstrap 4 CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'bs4/bootstrap.min.css' %}" />
+	<!-- Main Jquery -->
+	<script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+	<!-- Bootstrap 4 JS -->
+	<script type="text/javascript" src="{% static 'bs4/bootstrap.min.js' %}"></script>
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'custom.css' %}" />
+	<!-- Custom JS -->
+	<script type="text/javascript" src="{% static 'custom.js' %}"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+		<div class="container">
+		  <a class="navbar-brand" href="/">Just Cakes</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		  	<form class="form-inline my-2 my-lg-0" action="/search">
+		      <div class="input-group">
+				  <input name="q" type="text" class="form-control" placeholder="watcha looking for..." />
+				  <div class="input-group-append">
+				    <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
+				  </div>
+				</div>
+		    </form>
+		    <ul class="navbar-nav ml-auto">
+		      <li class="nav-item">
+		        <a class="nav-link text-white" href="/">Home</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link text-white" href="{% url 'category-list' %}">Categories</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link text-white" href="{% url 'occasion-list' %}">Occasions</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link text-white" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart (<span class="cart-list">{{request.session.cartdata|length}}</span>)</a>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  		<i class="fa fa-user"></i> My Account
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				{% if user.is_authenticated %}
+					<a class="dropdown-item" href="{% url 'my_dashboard' %}">Dashboard</a>
+					<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+				{% else %}
+					<a class="dropdown-item" href="{% url 'login' %}">Login</a>
+					<a class="dropdown-item" href="{% url 'signup' %}">Signup</a>
+				{% endif %}			
+				</div>
+				</li>
+		    </ul>
+		  </div>
+		</div>
+    </nav>
+
+    <div class="container">
+	    {% block content%}
+	    {% endblock%}
+    </div>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top container">
+        <div class="row">
+          <div class="col-12 col-md">
+            <a class="text-danger" href="/">Just Cakes</a>
+            <small class="d-block mb-3 text-muted">&copy; 2017-2023</small>
+          </div>
+          <div class="col-6 col-md">
+            <h5 class="text-danger">Featuring</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Biryani</a></li>
+              <li><a class="text-muted" href="#">Larry</a></li>
+              <!-- Add more list items if needed -->
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5 class="text-danger">Contact Us</h5>
+            <ul class="list-unstyled text-small">
+			  <li><a class="text-muted" href="https://instagram.com/neha_chettri08?igshid=MzRlODBiNWFlZA=="><i class="fab fa-instagram"></i> Just Cakes</a></li>
+			  <li><a class="text-muted" href="https://wa.me/1234567890"><i class="fab fa-whatsapp"></i> Contact Us on WhatsApp</a></li>
+			  <!-- Add more list items if needed -->
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+			<h5 class="text-danger">About</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="https://www.instagram.com/lovish_rana7/"><i class="fab fa-instagram"></i> Lr7</a></li>
+				<li><a class="text-muted" href="{% url 'tc' %}">Terms and Conditions</a></li>
+				<li><a class="text-muted" href="{% url 'about' %}">About Us</a></li>
+				<!-- Add more list items if needed -->
+			</ul>
+			</div>
+        </div>
+      </footer>
+</body>
+</html>
